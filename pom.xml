@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.accesscontrol</groupId>
+    <artifactId>accesscontrol</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>AccessControl</name>
+    <description>Tiny username allow-list plugin for Paper (offline mode, AuthMeReloaded)</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>25</maven.compiler.release>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>codemc</id>
+            <url>https://repo.codemc.io/repository/maven-releases/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- Paper API (provided: not bundled into the jar) -->
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>[26.2.build,)</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- AuthMe 6.0.x API classes (provided: not bundled into the jar).
+             The old fr.xephi:authme artifact stops at 5.7.0; 6.0.x publishes
+             the API in authme-core. Transitive dependencies are excluded since
+             only AuthMeApi and the AuthMe events are referenced. -->
+        <dependency>
+            <groupId>fr.xephi</groupId>
+            <artifactId>authme-core</artifactId>
+            <version>6.0.1</version>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>AccessControl</finalName>
+    </build>
+</project>

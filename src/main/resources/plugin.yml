@@ -1,0 +1,15 @@
+name: AccessControl
+version: 1.0.0
+main: io.github.accesscontrol.AccessControlPlugin
+api-version: '26.2'
+softdepend: [AuthMe]
+description: Tiny username allow-list for offline-mode servers running AuthMeReloaded.
+commands:
+  access:
+    description: Manage the username allow-list
+    usage: /access <add|remove|list> [name]
+    permission: accesscontrol.admin
+permissions:
+  accesscontrol.admin:
+    description: Allows managing the AccessControl allow-list
+    default: op

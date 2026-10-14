@@ -1,0 +1,10 @@
+# Taste
+- Verify every external API (exact Maven coordinates, packages, method signatures, version-string formats, thread behavior) against real documentation or upstream source before writing code that uses it; never rely on memory, and note where each fact was confirmed. Explicitly mandated: "CONFIRM BEFORE YOU WRITE (mandatory)". Confidence: 0.95
+- If something cannot be confirmed, do not invent it: use a defensive fallback (e.g., reflection with clear error handling) and flag it explicitly as unconfirmed/assumed in the deliverables. Confidence: 0.95
+- When compiling/running isn't possible, still verify by desk-check: re-read every file as compiler and reviewer, hand-trace the key usage scenarios, and report the traces. Confidence: 0.85
+- Report honestly and conservatively: separate Confirmed (with sources), Unconfirmed/assumed, and Not tested; never say code "works" unless it was run — say it is "written and desk-checked". Confidence: 0.95
+- State version/environment assumptions explicitly (e.g., in the README) rather than silently choosing. Confidence: 0.9
+- Keep dependencies minimal and clean: provided-scope APIs only, no shading, no libraries beyond what the task needs; no heavyweight infrastructure (no DB, no polling, no file watchers) when an in-memory + flat-file design suffices. Confidence: 0.85
+- Care about concurrency correctness: guard shared state with one lock or concurrent collections, route main-thread-only calls through the scheduler, keep I/O defensive (atomic writes, exceptions logged as warnings, never crash the host process). Confidence: 0.8
+- Prefers compact, readable single-file implementations (stated a ~250-350 line target for a plugin main class, constants at the top). Confidence: 0.7
+- Prefers the exact target version pinned and verified rather than inferred or range-based: when the assistant assumed "1.26.2" meant 26.1.2-or-newer with a compatibility-range api-version, the user corrected to "exactly 26.2" and asked for it to be confirmed against live sources before proceeding. When an environment fact can be confirmed, resolve it to the precise value instead of leaving a broad assumption. Confidence: 0.7
